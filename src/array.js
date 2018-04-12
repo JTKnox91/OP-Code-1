@@ -1,8 +1,8 @@
 
 // Array Functions
 
-// These functions provide tools for working with arrays. They will also work on the `arguments` object.
-// (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
+// These functions provide tools for working with arrays. They should also work on the `arguments` object.
+// When possible, try to reuse methods from this file and others, such as _.each or _.reduce.
 // Unless otherwise specified, DO NOT modify the input array.
 
 // Reference(s):
