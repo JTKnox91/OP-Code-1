@@ -1,0 +1,32 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <!-- Source Files -->
+  <script src="test/array.test.js"></script>
+  <script src="test/collection.test.js"></script>
+  <script src="test/function.test.js"></script>
+  <script src="test/object.test.js"></script>
+  <script src="test/util.test.js"></script>
+
+  <!-- Test Files -->
+  <script>mocha.setup('bdd')</script>
+  <script src="test/array.test.js"></script>
+  <script src="test/collection.test.js"></script>
+  <script src="test/function.test.js"></script>
+  <script src="test/object.test.js"></script>
+  <script src="test/util.test.js"></script>
+
+  <!-- Run Tests -->
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['_']);
+    mocha.run();
+  </script>
+</body>
+</html>

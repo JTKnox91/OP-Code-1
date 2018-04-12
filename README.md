@@ -11,7 +11,24 @@ A small tribute to the Underscore.js library ...as a purely academic exercise.
 
 ## Usage
 
-TBD
+1. Open `TestRunner.html` in a web browser.
+
+2. Notice some tests are:
+  
+  * Already passing (You're welcome)
+
+  * Failing (You'll need to edit the method in `src`)
+
+  * Missing (You'll need to write a test AND edit in `src`)
+
+3. Notice this library has been broken into seperate files for each module (and each file has a corresponding test file).
+
+  * Instead of the alphabetical order they're in, I would reccomend tackling them in the following order:
+    
+    * TBD
+
+  * But if you get stuck feel free to move on to a different section while waiting for help.
+
 
 ## Reccomendations
 
