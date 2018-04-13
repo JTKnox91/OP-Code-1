@@ -8,9 +8,8 @@
 //   `arguments` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
 //   `Array.prototype.slice` - https://stackoverflow.com/questions/7056925/how-does-array-prototype-slice-call-work
 
-
 // (You'll see this line in every file. It ensures these files will work with eachother and in any order.)
-window._ = window._ || {}; const _ = window._;
+window._ = _ = (window._ || {});
 
 
 // _.first(array, [n])

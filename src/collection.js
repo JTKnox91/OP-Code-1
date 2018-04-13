@@ -19,7 +19,7 @@
 //     "stable sorting" - https://en.wikipedia.org/wiki/Sorting_algorithm#Stability
 
 // (You'll see this line in every file. It ensures these files will work with eachother and in any order.)
-window._ = window._ || {}; const _ = window._;
+window._ = _ = (window._ || {});
 
 
 // _.identity(value) 
