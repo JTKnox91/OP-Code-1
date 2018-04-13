@@ -22,6 +22,16 @@
 window._ = window._ || {}; const _ = window._;
 
 
+// _.identity(value) 
+// Returns the same value that is used as the argument. In math: f(x) = x
+// This function looks useless, but is used throughout Underscore as a default iteratee.
+// Note(s):
+//   This doesn't really belong with the "collection" functions,
+//   but for academic purposes its useful to display it here.
+
+_.identity = function (input) {return input;};
+// yup, that was really the entire function. Figuring out where to use it is the hard part.
+
 // _.each(collection, iteratee)
 // Iterates over a collection of elements, yielding each in turn to an iteratee function. Each
 // invocation of iteratee is called with three arguments: (element, index, collection). If collection is a
