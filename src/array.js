@@ -1,4 +1,3 @@
-
 // Array Functions
 
 // These functions provide tools for working with arrays. They should also work on the `arguments` object.
@@ -12,6 +11,7 @@
 
 // (You'll see this line in every file. It ensures these files will work with eachother and in any order.)
 window._ = window._ || {}; const _ = window._;
+
 
 // _.first(array, [n])
 // Returns the first element of an array. Passing n will return the first n elements of the array.
