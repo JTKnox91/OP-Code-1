@@ -46,3 +46,13 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
 
     * You should always see your tests fail at least once. Doing so will help verify that your tests are providing value. 
 
+## Style Guide
+
+1. Use spaces instead of tab characters
+    
+    * (You can configure your text editor to make spaces wehn you hit the TAB key)
+
+2. Each level of indentation should be 2 spaces. 
+
+    * This might seem narrow at first, but you'll find yourself writing a lot of nested functions real quick.
+
