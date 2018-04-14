@@ -319,3 +319,40 @@ _.indexBy = function (collection, iteratee) {
 _.groupBy = function (collection, iteratee) {
   /* TODO */
 };
+
+
+// _.isEqual(object, other) 
+// Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
+// Example(s):
+//   var stooge = {name: 'moe', luckyNumbers: [13, 27, 34]};
+//   var clone  = {name: 'moe', luckyNumbers: [13, 27, 34]};
+//   stooge == clone;
+//   => false
+//   _.isEqual(stooge, clone);
+//   => true
+//   var stooge = {name: 'moe', luckyNumbers: [13, 27, 34]};
+//   var clone  = {name: 'moe', luckyNumbers: [[1, 3], [2, 7], [3, 4]};
+//   _.isEqual(stooge, clone);
+//   => false
+// Note(s):
+//   Javascript script compares mutable types like Objects and Arrays by reference,
+//   that is to say, unless the compared items share the same address in memory,
+//   they will not be equal (regardless of value).
+
+_.isEqual = function (object, other) {
+  /* TODO */
+};
+
+
+// _.isEmpty(object) 
+// Returns true if an enumerable object contains no values (no enumerable own-properties).
+// For strings and array-like objects _.isEmpty checks if the length property is 0.
+// Example(s):
+//   _.isEmpty([1, 2, 3]);
+//   => false
+//   _.isEmpty({});
+//   => true
+
+_.isEmpty = function (object) {
+
+};
