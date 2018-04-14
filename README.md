@@ -25,7 +25,17 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
 
     * Instead of the alphabetical order they're in, I would reccomend tackling them in the following order:
     
-        * TBD
+        * `src/collections.js` (all tests have been written)
+
+        * `test/object.test.js` (some, but not all of the test of been pre-written)
+
+        * `src/object.js` ()
+
+        * `test/array.test.js` ()
+
+        * `src/array.js` 
+
+        * (The `functions` module is still int he works but should definitely be tackled AFTER all of these)
 
     * But if you get stuck feel free to move on to a different section while waiting for help.
 
