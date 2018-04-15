@@ -1,3 +1,7 @@
+// Reference(s):
+//   `describe`,`it`,`beforeEach`, etc... - https://mochajs.org/
+//   `expect` - https://github.com/mjackson/expect/tree/4ea42d5fdf542b307a5e92b06df1ab56de586845
+
 describe("Utility Module", function () {
 
   // _.identity(value) 
@@ -23,7 +27,6 @@ var mutateTest = function (methodName) {
   it("does not mutate its input", function () {
     var collection = {a:1,b:"2",c:[1,2,3]};
     var clone = {a:1,b:"2",c:[1,2,3]};
-    Object.freeze(collection);
     var secondArgLibrary = {
       each: _.identity, map: _.identity, reduce: _.identity, reduceRight: _.identity, sortBy: _.identity,
       every: alwaysTrue, filter: alwaysTrue, find: alwaysFalse, reject: alwaysFalse, some: alwaysFalse,
@@ -352,23 +355,23 @@ describe("_.findWhere", function () {
     ];
     var properties = {b:2,c:3}
     var expected = {a:1, b:2, c:3};
-    expect(_.whereWhere(collection, properties)).toEqual(expected);
+    expect(_.findWhere(collection, properties)).toEqual(expected);
   });
 
   it("always treats `properties` like a regular object", function () {
-    expect(_.where([[],[1],[2],[3,4]], {length:1})).toEqual([1]);
+    expect(_.findWhere([[],[1],[2],[3,4]], {length:1})).toEqual([1]);
   });
 
   it("handles primitive values gracefully", function () {
-    expect(_.where([1,true,{a:1}], {a:1})).toEqual([{a:1}]);
+    expect(_.findWhere([1,true,{a:1}], {a:1})).toEqual([{a:1}]);
   });
 
   it("returns `undefined` if no match is found", function () {
-    expect(_.where([{a:1},{a:2}], {a:3})).toBe(undefined);
+    expect(_.findWhere([{a:1},{a:2}], {a:3})).toBe(undefined);
   });
 
   it("returns `undefined` if the collection is empty", function () {
-    expect(_.where({}, {a:3})).toBe(undefined);
+    expect(_.findWhere({}, {a:3})).toBe(undefined);
   });
 });
 
@@ -547,7 +550,7 @@ describe("_.max", function () {
 
   it("returns the highest value in the collection based on a the return of an iteratee function", function () {
     var collection = [{name: "moe", age: 40}, {name: "larry", age: 50}, {name: "curly", age: 60}];
-    expect(_.max(stooges, function(stooge){ return stooge.age; })).toEqual({name: "curly", age: 60});
+    expect(_.max(collection, function(stooge){ return stooge.age; })).toEqual({name: "curly", age: 60});
   });
 
   it("ignores non number values", function () {
@@ -576,7 +579,7 @@ describe("_.min", function () {
 
   it("returns the lowest value in the collection based on a the return of an iteratee function", function () {
     var collection = [{name: "moe", age: 40}, {name: "larry", age: 50}, {name: "curly", age: 60}];
-    expect(_.min(stooges, function(stooge){ return stooge.age; })).toEqual({name: "moe", age: 40});
+    expect(_.min(collection, function(stooge){ return stooge.age; })).toEqual({name: "moe", age: 40});
   });
 
   it("ignores non number values", function () {
@@ -609,7 +612,7 @@ describe("_.sortBy", function () {
     var stooges = [{name: "moe", age: 40}, {name: "larry", age: 50}, {name: "curly", age: 60}];
     var sorted = [{name: "curly", age: 60}, {name: "larry", age: 50}, {name: "moe", age: 40}];
     var getName = function (arr) {return arr.length;};
-    expect(_.sortBy(stooges, getLength)).toEqual(sorted);
+    expect(_.sortBy(stooges, getName)).toEqual(sorted);
   });
 
   it("returns a (shallow) sorted copy of collection, based on a string propertyName", function () {

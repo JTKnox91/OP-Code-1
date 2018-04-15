@@ -5,20 +5,23 @@
   <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
+  <!-- Load Testing Suite -->
   <div id="mocha"></div>
+  <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+  <script src="https://unpkg.com/expect@%3C21/umd/expect.min.js"></script>
 
-  <!-- Source Files -->
-  <script src="test/array.test.js"></script>
-  <script src="test/collection.test.js"></script>
-  <script src="test/function.test.js"></script>
-  <script src="test/object.test.js"></script>
+  <!-- Load Source Files -->
+  <script src="src/collection.js"></script>
+  <script src="src/object.js"></script>
+  <script src="src/array.js"></script>
+  <script src="src/function.js"></script>
 
-  <!-- Test Files -->
+  <!-- Load Test Files -->
   <script>mocha.setup('bdd')</script>
-  <script src="test/array.test.js"></script>
   <script src="test/collection.test.js"></script>
-  <script src="test/function.test.js"></script>
   <script src="test/object.test.js"></script>
+  <script src="test/array.test.js"></script>
+  <script src="test/function.test.js"></script>
 
   <!-- Run Tests -->
   <script>

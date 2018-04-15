@@ -1,3 +1,7 @@
+// Reference(s):
+//   `describe`,`it`,`beforeEach`, etc... - https://mochajs.org/
+//   `expect` - https://github.com/mjackson/expect/tree/4ea42d5fdf542b307a5e92b06df1ab56de586845
+
 describe('Array Module', function () {
 // Disclaimer: Its usually bad style to not indent to contents of a function,
 // but I am making an exception since most of the file is inside this function.
@@ -17,7 +21,7 @@ describe('Array Module', function () {
 describe("_.first", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -32,7 +36,7 @@ describe("_.first", function () {
 describe("_.initial", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -46,7 +50,7 @@ describe("_.initial", function () {
 describe("_.last", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -60,7 +64,7 @@ describe("_.last", function () {
 describe("_.rest", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -72,7 +76,7 @@ describe("_.rest", function () {
 describe("_.compact", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -86,7 +90,7 @@ describe("_.compact", function () {
 describe("_.flatten", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -98,7 +102,7 @@ describe("_.flatten", function () {
 describe("_.without", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -110,7 +114,7 @@ describe("_.without", function () {
 describe("_.union", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -122,7 +126,7 @@ describe("_.union", function () {
 describe("_.intersection", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -134,7 +138,7 @@ describe("_.intersection", function () {
 describe("_.difference", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -152,7 +156,7 @@ describe("_.difference", function () {
 describe("_.uniq", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -165,7 +169,7 @@ describe("_.uniq", function () {
 describe("_.zip", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -179,7 +183,7 @@ describe("_.zip", function () {
 describe("_.unzip", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -193,7 +197,7 @@ describe("_.unzip", function () {
 describe("_.findIndex", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
@@ -217,7 +221,7 @@ describe("_.findIndex", function () {
 describe("_.range", function () {
   /* TODO */
   it("needs you to write tests about it", function () {
-    expect(false).toBe(true);
+    expect(false).toBe(true, "This method needs tests.");
   });
 }); 
 
