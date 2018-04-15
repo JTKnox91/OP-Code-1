@@ -16,7 +16,6 @@
 //   "duck-typing" - https://en.wikipedia.org/wiki/Duck_typing
 //   misc
 //     `Number.prototype` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/prototype
-//     "stable sorting" - https://en.wikipedia.org/wiki/Sorting_algorithm#Stability
 
 // (You'll see this line in every file. It ensures these files will work with eachother and in any order.)
 window._ = _ = (window._ || {});
@@ -46,7 +45,7 @@ _.each = function (collection, iteratee) {
   /* NO TODO, consider this a freebee :) */
 
   // treat like an array (but could also be `arguments`)
-  if (collection.length) {
+  if (collection.length !== undefined) {
     for (var i = 0; i < collection.length; i++) {
       iteratee(collection[i], i, collection);
       // ^ note that the iteratee is being passed not just the value,
@@ -258,9 +257,9 @@ _.max = function (collection, iteratee) {
 };
 
 
-// min_.min(collection, [iteratee], [context]) 
+// _.min(collection, [iteratee])
 // Returns the minimum value in collection. The opposite of _.max.
-// Number.NEGATIVE_INFINITY is returned if collection is empty. Non-numerical values in collection will be ignored.
+// Number.POSITIVE_INFINITY is returned if collection is empty. Non-numerical values in collection will be ignored.
 // Example(s):
 //   var numbers = [10, 5, 100, 2, 1000];
 //   _.min(numbers);
@@ -272,7 +271,7 @@ _.min = function (collection, iteratee) {
 
 
 // _.sortBy(collection, iteratee) 
-// Returns a (stably) sorted copy of collection, ranked in ascending order by the results of running
+// Returns a sorted copy of collection, ranked in ascending order by the results of running
 // each value through iteratee. iteratee may also be the string name of the property to sort by (eg. length).
 // Example(s):
 //   _.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
@@ -321,6 +320,19 @@ _.groupBy = function (collection, iteratee) {
 };
 
 
+// _.isEmpty(object) 
+// Returns true if an enumerable object contains no values (no enumerable own-properties).
+// For strings and array-like objects _.isEmpty checks if the length property is 0.
+// Example(s):
+//   _.isEmpty([1, 2, 3]);
+//   => false
+//   _.isEmpty({});
+//   => true
+
+_.isEmpty = function (object) {
+
+};
+
 // _.isEqual(object, other) 
 // Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
 // Example(s):
@@ -341,18 +353,4 @@ _.groupBy = function (collection, iteratee) {
 
 _.isEqual = function (object, other) {
   /* TODO */
-};
-
-
-// _.isEmpty(object) 
-// Returns true if an enumerable object contains no values (no enumerable own-properties).
-// For strings and array-like objects _.isEmpty checks if the length property is 0.
-// Example(s):
-//   _.isEmpty([1, 2, 3]);
-//   => false
-//   _.isEmpty({});
-//   => true
-
-_.isEmpty = function (object) {
-
 };
