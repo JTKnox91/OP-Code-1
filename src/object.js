@@ -24,18 +24,6 @@ _.keys = function (object) {
 };
 
 
-/* DO I KEEP THIS?
-allKeys_.allKeys(object) 
-Retrieve all the names of object's own and inherited properties.
-
-function Stooge(name) {
-  this.name = name;
-}
-Stooge.prototype.silly = true;
-_.allKeys(new Stooge("Moe"));
-=> ["name", "silly"]
-*/
-
 // _.values(object)
 // Return all of the values of the object's own properties.
 // Example(s):
@@ -85,7 +73,7 @@ _.invert = function (object) {
 };
 
 
-// _.functions(object) Alias: methods 
+// _.functions(object)
 // Returns a sorted list of the names of every method in an object,
 // that is to say, the name of property that has a function for a value.
 // Example(s):
@@ -163,163 +151,25 @@ _.omit = function (object, predicate) {
   /* TODO */
 };
 
-defaults_.defaults(object, *defaults) 
-Fill in undefined properties in object with the first value present in the following list of defaults objects.
 
-var iceCream = {flavor: "chocolate"};
-_.defaults(iceCream, {flavor: "vanilla", sprinkles: "lots"});
-=> {flavor: "chocolate", sprinkles: "lots"}
-clone_.clone(object) 
-Create a shallow-copied clone of the provided plain object. Any nested objects or arrays will be copied by reference, not duplicated.
+// _.defaults(object, *defaults) 
+// Fill in undefined properties in object with the first value present in the following list of defaults objects.
+// Example(s):
+//   var iceCream = {flavor: "chocolate"};
+//   _.defaults(iceCream, {flavor: "vanilla", sprinkles: "lots"}, {sprinkles, "little"});
+//   => {flavor: "chocolate", sprinkles: "lots"}
 
-_.clone({name: 'moe'});
-=> {name: 'moe'};
-tap_.tap(object, interceptor) 
-Invokes interceptor with the object, and then returns object. The primary purpose of this method is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
+_.defaults = function (obect) {
+  /* TODO */
+};
 
-_.chain([1,2,3,200])
-  .filter(function(num) { return num % 2 == 0; })
-  .tap(alert)
-  .map(function(num) { return num * num })
-  .value();
-=> // [2, 200] (alerted)
-=> [4, 40000]
-has_.has(object, key) 
-Does the object contain the given key? Identical to object.hasOwnProperty(key), but uses a safe reference to the hasOwnProperty function, in case it's been overridden accidentally.
 
-_.has({a: 1, b: 2, c: 3}, "b");
-=> true
-property_.property(key) 
-Returns a function that will itself return the key property of any passed-in object.
+// _.clone(object)
+// Create a deep clone of the provided plain object. Any nested objects or arrays should be recursively cloned.
+// Example(s):
+//   _.clone({name: 'moe'});
+//   => {name: 'moe'};
 
-var stooge = {name: 'moe'};
-'moe' === _.property('name')(stooge);
-=> true
-propertyOf_.propertyOf(object) 
-Inverse of _.property. Takes an object and returns a function which will return the value of a provided property.
-
-var stooge = {name: 'moe'};
-_.propertyOf(stooge)('name');
-=> 'moe'
-matcher_.matcher(attrs) Alias: matches 
-Returns a predicate function that will tell you if a passed in object contains all of the key/value properties present in attrs.
-
-var ready = _.matcher({selected: true, visible: true});
-var readyToGoList = _.filter(list, ready);
-isEqual_.isEqual(object, other) 
-Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
-
-var stooge = {name: 'moe', luckyNumbers: [13, 27, 34]};
-var clone  = {name: 'moe', luckyNumbers: [13, 27, 34]};
-stooge == clone;
-=> false
-_.isEqual(stooge, clone);
-=> true
-isMatch_.isMatch(object, properties) 
-Tells you if the keys and values in properties are contained in object.
-
-var stooge = {name: 'moe', age: 32};
-_.isMatch(stooge, {age: 32});
-=> true
-isEmpty_.isEmpty(object) 
-Returns true if an enumerable object contains no values (no enumerable own-properties). For strings and array-like objects _.isEmpty checks if the length property is 0.
-
-_.isEmpty([1, 2, 3]);
-=> false
-_.isEmpty({});
-=> true
-isElement_.isElement(object) 
-Returns true if object is a DOM element.
-
-_.isElement(jQuery('body')[0]);
-=> true
-isArray_.isArray(object) 
-Returns true if object is an Array.
-
-(function(){ return _.isArray(arguments); })();
-=> false
-_.isArray([1,2,3]);
-=> true
-isObject_.isObject(value) 
-Returns true if value is an Object. Note that JavaScript arrays and functions are objects, while (normal) strings and numbers are not.
-
-_.isObject({});
-=> true
-_.isObject(1);
-=> false
-isArguments_.isArguments(object) 
-Returns true if object is an Arguments object.
-
-(function(){ return _.isArguments(arguments); })(1, 2, 3);
-=> true
-_.isArguments([1,2,3]);
-=> false
-isFunction_.isFunction(object) 
-Returns true if object is a Function.
-
-_.isFunction(alert);
-=> true
-isString_.isString(object) 
-Returns true if object is a String.
-
-_.isString("moe");
-=> true
-isNumber_.isNumber(object) 
-Returns true if object is a Number (including NaN).
-
-_.isNumber(8.4 * 5);
-=> true
-isFinite_.isFinite(object) 
-Returns true if object is a finite Number.
-
-_.isFinite(-101);
-=> true
-
-_.isFinite(-Infinity);
-=> false
-isBoolean_.isBoolean(object) 
-Returns true if object is either true or false.
-
-_.isBoolean(null);
-=> false
-isDate_.isDate(object) 
-Returns true if object is a Date.
-
-_.isDate(new Date());
-=> true
-isRegExp_.isRegExp(object) 
-Returns true if object is a RegExp.
-
-_.isRegExp(/moe/);
-=> true
-isError_.isError(object) 
-Returns true if object inherits from an Error.
-
-try {
-  throw new TypeError("Example");
-} catch (o_O) {
-  _.isError(o_O);
-}
-=> true
-isNaN_.isNaN(object) 
-Returns true if object is NaN.
-Note: this is not the same as the native isNaN function, which will also return true for many other not-number values, such as undefined.
-
-_.isNaN(NaN);
-=> true
-isNaN(undefined);
-=> true
-_.isNaN(undefined);
-=> false
-isNull_.isNull(object) 
-Returns true if the value of object is null.
-
-_.isNull(null);
-=> true
-_.isNull(undefined);
-=> false
-isUndefined_.isUndefined(value) 
-Returns true if value is undefined.
-
-_.isUndefined(window.missingVariable);
-=> true
+_.clone = function (object) {
+  /* TODO */
+};
