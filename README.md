@@ -7,7 +7,9 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
 1. Create a fork of this repository.
 
 2. Clone the fork to your local machine with
+
 `$ git clone https://github.com/<YOUR_USER_NAME>/OP-Code-1.git <NEW_FOLDER_NAME>`
+
 `$ cd <NEW_FOLDER_NAME>`
 
 ## Usage
