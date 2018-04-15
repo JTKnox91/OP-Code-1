@@ -7,7 +7,8 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
 1. Create a fork of this repository.
 
 2. Clone the fork to your local machine with
-`git clone https://github.com/<USER_NAME>/OP-Code-1.git`
+`$ git clone https://github.com/<YOUR_USER_NAME>/OP-Code-1.git <NEW_FOLDER_NAME>`
+`$ cd <NEW_FOLDER_NAME>`
 
 ## Usage
 
@@ -17,25 +18,25 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
   
     * Already passing (You're welcome)
 
-    * Failing (You'll need to edit the method in `src`)
+    * Failing (You'll need to edit the method in the `src` folder)
 
-    * Missing (You'll need to write a test AND edit in `src`)
+    * Missing (You'll need to add/edit an assertion in the `test` folder THEN edit in the method in the `src` folder)
 
 3. Notice this library has been broken into seperate files for each module (and each file has a corresponding test file).
 
     * Instead of the alphabetical order they're in, I would reccomend tackling them in the following order:
     
-        * `src/collections.js` (all tests have been written)
+        * `src/collections.js` (all test for this module have been written before hand)
 
-        * `test/object.test.js` (some, but not all of the test of been pre-written)
+        * `test/object.test.js` (some, but not all of the test of been written)
 
-        * `src/object.js` ()
+        * `src/object.js`
 
-        * `test/array.test.js` ()
+        * `test/array.test.js` (you will have to write all the tests yourself)
 
         * `src/array.js` 
 
-        * (The `functions` module is still int he works but should definitely be tackled AFTER all of these)
+        * (The `functions` module is still under construction but should definitely be tackled AFTER all of these)
 
     * But if you get stuck feel free to move on to a different section while waiting for help.
 
@@ -54,7 +55,13 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
   
     * Ideally, put the test on its own commit. But feel free to add more tests after writing a method if you realize there is an uncovered case.
 
-    * You should always see your tests fail at least once. Doing so will help verify that your tests are providing value. 
+    * You should always see your tests fail at least once. Doing so will help verify that your tests are providing value.
+
+3. If you're not sure what a method is supposed to do. You can visit the official [Underscore Documentation](http://underscorejs.org/)
+
+    * Some methods have been modified (mostly simplified, for educational purposes) but the examples are usually relevant.
+
+4. There is (or soon will be) a solution branch to the repo, but try to ask for help before resorting to using it.
 
 ## Style Guide
 
