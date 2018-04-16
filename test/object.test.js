@@ -72,7 +72,7 @@ describe("_.values", function () {
 //   => {start: 10, end: 17}
 describe("_.mapObject", function () {
   mutateChecker("mapObject", _.identity);
-  argumentChecker("findKey");
+  argumentChecker("mapObject");
 
   it("returns a (shallow) copy of the object with its values transformed", function () {
     /* TODO: Write a real expectation here. */
@@ -126,14 +126,14 @@ describe("_.invert", function () {
 describe("_.functions", function () {
   mutateChecker("functions");
 
-  it("Returns a sorted list of the names of every method (funcion) in an object", function () {
+  it("Returns a sorted list of the names of every method (function) in an object", function () {
     var object = {
       one: "one",
       two: 2,
       three: function () {return 3;},
       four: function () {return "four";},
     };
-    expect(_.functions(object)).toEqual(["four", "three"]);
+    expect(_.functions(object).sort()).toEqual(["four", "three"]);
   });
 });
 
@@ -141,7 +141,7 @@ describe("_.functions", function () {
 // Similar to _.findIndex but for keys in objects. Returns the key where the predicate truth test passes or undefined.
 describe("_.findKey", function () {
   mutateChecker("findKey", alwaysFalse);
-  argumentChecker("findKey");
+  argumentChecker("findKey", false);
 
   it("returns where the key where a predicate truth test passed", function () {
     /* TODO: Write a real expectation here. */
@@ -230,11 +230,11 @@ describe("_.extendOwn", function () {
 //   => {age: 50}
 describe("_.pick", function () {
   mutateChecker("pick", alwaysFalse);
-  argumentChecker("findKey");
+  argumentChecker("pick");
   var object = {a:1,b:2,c:3,d:4};
 
   it("returns a copy of the object, with only certain keys remaining", function () {
-    expect(_.pick(object), "a").toEqual({a:1});
+    expect(_.pick(object, "a")).toEqual({a:1});
   });
 
   it("can handle multiple keys being passed in as multiple arguments", function () {
@@ -262,9 +262,9 @@ describe("_.pick", function () {
 //     return _.isNumber(value);
 //   });
 //   => {name: 'moe', userid: 'moe1'}
-describe("_.ommit", function () {
-  mutateChecker("ommit", alwaysTrue);
-  argumentChecker("ommit");
+describe("_.omit", function () {
+  mutateChecker("omit", alwaysTrue);
+  argumentChecker("omit");
 
   it("returns a copy of the object, with only certain keys removed", function () {
     /* TODO: Write a real expectation here. */
@@ -296,7 +296,7 @@ describe("_.ommit", function () {
 describe("_.defaults", function () {
   //no mutate test, this should actually change the input object
   it("assigns the source properties onto the destination object, using 'first object wins'", function () {
-    let defaultIceCream = _.defaults(iceCream, {flavor: "vanilla", sprinkles: "lots"}, {sprinkles: "little"});
+    let defaultIceCream = _.defaults({flavor: "chocolate"}, {flavor: "vanilla", sprinkles: "lots"}, {sprinkles: "little"});
     expect(defaultIceCream).toEqual({flavor: "chocolate", sprinkles: "lots"});
   });
 });
