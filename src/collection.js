@@ -42,7 +42,6 @@ _.identity = function (input) {return input;};
 //   => also alerts 1, then 2, then 3
 
 _.each = function (collection, iteratee) {
-  /* NO TODO, consider this a freebee :) */
 
   // treat like an array (but could also be `arguments`)
   if (collection.length !== undefined) {
@@ -79,7 +78,11 @@ _.each = function (collection, iteratee) {
 //   How could you reuse _.forEach here?
 
 _.map = function (collection, iteratee) {
-  /* TODO */
+  var result = [];
+  _.each(collection, function (v, k, c) {
+    result.push(iteratee(v,k,c));
+  });
+  return result;
 };
 
 
@@ -90,7 +93,7 @@ _.map = function (collection, iteratee) {
 //   2) the value  of the iteration, and a reference to the entire collection.
 //   3) the index (or key)
 //   4) a reference to the original collection
-// If no `intial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
+// If no `initial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
 // and the first element is instead passed as the `initial` in the invocation of the iteratee on the next element in the collection.
 // Example(s):
 //   _.reduce([2, 3], function(sum, n){ return sum + num; }, 1);
@@ -101,13 +104,21 @@ _.map = function (collection, iteratee) {
 //   How could you reuse _.forEach here?
 
 _.reduce = function (collection, iteratee, initial) {
-  /* TODO */
+  var result = initial;
+  _.each(collection, function (v, k, c) {
+    if (result === undefined) {
+      result = v;
+    } else {
+      result = iteratee(result, v, k, c);
+    }
+  });
+  return result;
 };
 
 
 // _.reduceRight(collection, iteratee, [initial])
 // The "right to left" version of reduce.
-// If no `intial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
+// If no `initial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
 // and the last element is instead passed as the `initial` in the invocation of the iteratee on the second to last element in the collection.
 // Example(s):
 //   var collection = [[0, 1], [2, 3], [4, 5]];
@@ -117,7 +128,13 @@ _.reduce = function (collection, iteratee, initial) {
 //   For non-array like collections this is functionally equivalent to _.reduce.
 
 _.reduceRight = function (collection, iteratee, initial) {
-  /* TODO */
+  if (typeof collection.length === "number") {
+    Array.prototype.reverse.call(collection);
+    return _.reduce(collection, iteratee, initial)
+    Array.prototype.reverse.call(collection);
+  } else {
+    return _.reduce(collection, iteratee, initial);
+  }
 };
 
 
@@ -133,7 +150,20 @@ _.reduceRight = function (collection, iteratee, initial) {
 //   because it should return early as soon as finding a match.
 
 _.find = function (collection, predicate) {
-  /* TODO */
+  if (typeof collection.length === "number") {
+    for (var i = 0; i < collection.length; i++) {
+      if (predicate(collection[i], i, collection)) {
+        return collection[i];
+      }
+    }
+  } else {
+    for (var k in collection) {
+      if (predicate(collection[k], i, collection)) {
+        return collection[k];
+      }
+    }
+  }
+  return undefined; //this happens by default but its good to be explicit
 };
 
 
@@ -146,7 +176,10 @@ _.find = function (collection, predicate) {
 //   How could you reuse _.reduce here?
 
 _.filter = function (collection, predicate) {
-  /* TODO */
+  return _.reduce(collection, function (filtered, v, k, c) {
+    if (predicate(v,k,c)) { filtered.push(v); }
+    return filtered;
+  }, []);
 };
 
 
@@ -161,7 +194,13 @@ _.filter = function (collection, predicate) {
 //   How could you reuse _.filter here?
 
 _.where = function (collection, properties) {
-  /* TODO */
+  var containsProps = function (obj) {
+    for (var k in properties) {
+      if (obj[k] !== properties[k]) {return false;}
+    }
+    return true;
+  };
+  return _.filter(collection, containsProps);
 };
 
 
@@ -176,7 +215,13 @@ _.where = function (collection, properties) {
 //     conduct of the war."}
 
 _.findWhere = function (collection, properties) {
-  /* TODO */
+  var containsProps = function (obj) {
+    for (var k in properties) {
+      if (obj[k] !== properties[k]) {return false;}
+    }
+    return true;
+  };
+  return _.find(collection, containsProps);
 };
 
 
@@ -186,8 +231,9 @@ _.findWhere = function (collection, properties) {
 //   var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 //   => [1, 3, 5]
 
-_.reject = function (collection, properties) {
-  /* TODO */
+_.reject = function (collection, predicate) {
+  var reversePredicate = function (v,k,c) {return !predicate(v,k,c);};
+  return _.filter(collection, reversePredicate);
 };
 
 
@@ -201,7 +247,10 @@ _.reject = function (collection, properties) {
 //   => false
 
 _.every = function (collection, predicate) {
-  /* TODO */
+  predicate = predicate || function (v) {return !!v;}
+  return _.reduce(collection, function (hasAll, v, k, c) {
+    return hasAll && predicate(v,k,c); 
+  }, true);
 };
 
 
@@ -213,7 +262,9 @@ _.every = function (collection, predicate) {
 //   => true
 
 _.some = function (collection, predicate) {
-  /* TODO */
+  predicate = predicate || function (v) {return !!v;}
+  var found = _.find(collection, predicate);
+  return found !== undefined ? true : false;
 };
 
 
@@ -226,7 +277,8 @@ _.some = function (collection, predicate) {
 //   How could you reuse _.some here?
 
 _.contains = function (collection, value) {
-  /* TODO */
+  var predicate = function (v) {return v === value;}
+  return _.some(collection, predicate);
 };
 
 
@@ -239,7 +291,8 @@ _.contains = function (collection, value) {
 //   => ["moe", "larry", "curly"]
 
 _.pluck = function (collection, propertyName) {
-  /* TODO */
+  var iteratee = function (v) {return v[propertyName];}
+  return _.map(collection, iteratee);
 };
 
 
@@ -253,7 +306,18 @@ _.pluck = function (collection, propertyName) {
 //   => {name: 'curly', age: 60};
 
 _.max = function (collection, iteratee) {
-  /* TODO */
+  iteratee = iteratee || _.identity;
+  var highestElement, highestValue;
+  highestElement = highestValue = Number.NEGATIVE_INFINITY;
+  var maxIteratee = function (v,k,c) {
+    var currentValue = iteratee(v,k,c)
+    if (typeof currentValue === "number" && currentValue > highestValue) {
+      highestValue = currentValue;
+      highestElement = v;
+    }
+  };
+  _.each(collection, maxIteratee);
+  return highestElement;
 };
 
 
@@ -266,8 +330,18 @@ _.max = function (collection, iteratee) {
 //   => 2
 
 _.min = function (collection, iteratee) {
-  /* TODO */
-};
+  iteratee = iteratee || _.identity;
+  var lowestElement, lowestValue;
+  lowestElement = lowestValue = Number.POSITIVE_INFINITY;
+  var maxIteratee = function (v,k,c) {
+    var currentValue = iteratee(v,k,c)
+    if (typeof currentValue === "number" && currentValue < lowestValue) {
+      lowestValue = currentValue;
+      lowestElement = v;
+    }
+  };
+  _.each(collection, maxIteratee);
+  return lowestElement;};
 
 
 // _.sortBy(collection, iteratee) 
@@ -281,7 +355,18 @@ _.min = function (collection, iteratee) {
 //   => [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
 
 _.sortBy = function (collection, iteratee) {
-  /* TODO */
+  collection = _.map(collection, _.identity);
+  var compareFunc;
+  if (typeof iteratee === "string") {
+    compareFunc = function (A, B) {
+      return A[iteratee] < B[iteratee] ? -1 : 1;
+    };
+  } else {
+    compareFunc = function (A, B) {
+      return iteratee(A) < iteratee(B) ? -1 : 1;
+    };
+  }
+  return collection.sort(compareFunc);
 };
 
 
@@ -300,7 +385,17 @@ _.sortBy = function (collection, iteratee) {
 //   This is only expected to work your keys are unique. 
 
 _.indexBy = function (collection, iteratee) {
-  /* TODO */
+  if (typeof iteratee === "string") {
+    var propName = iteratee;
+    iteratee = function (v) {return v[propName];}; 
+  } else {
+    iteratee = iteratee || _.identity;
+  }
+  var result = {};
+  _.each(collection, function (v, k, c) {
+    result[iteratee(v,k,c)] = v;
+  });
+  return result;
 };
 
 
@@ -316,7 +411,20 @@ _.indexBy = function (collection, iteratee) {
 //   Similiar to _.indexBy but can handle non-unqiue keys.  
 
 _.groupBy = function (collection, iteratee) {
-  /* TODO */
+  if (typeof iteratee === "string") {
+    var propName = iteratee;
+    iteratee = function (v) {return v[propName];}; 
+  } else {
+    iteratee = iteratee || _.identity;
+  }
+  var result = {};
+  _.each(collection, function (v, k, c) {
+    var newKey = iteratee(v,k,c);
+    var array = result[newKey] || [];
+    array.push(v);
+    result[newKey] = array;
+  });
+  return result;
 };
 
 
@@ -330,7 +438,8 @@ _.groupBy = function (collection, iteratee) {
 //   => true
 
 _.isEmpty = function (object) {
-
+  var alwaysTrue = function () {return true;};
+  return !_.some(object, alwaysTrue);
 };
 
 // _.isEqual(object, other) 
@@ -352,5 +461,18 @@ _.isEmpty = function (object) {
 //   they will not be equal (regardless of value).
 
 _.isEqual = function (object, other) {
-  /* TODO */
+  if (object === null || other === null) {
+    return object === other;
+  } else if (typeof object === "object" && typeof other === "object") {
+    if (object === other) {return true;}
+    for (var k in object) {
+      if (!_.isEqual(object[k], other[k])) {return false;}
+    }
+    for (var k in other) {
+      if (!_.isEqual(other[k], object[k])) {return false;}
+    }
+    return true;
+  } else {
+    return object === other;
+  }
 };
