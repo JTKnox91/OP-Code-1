@@ -31,7 +31,7 @@ var mutateTest = function (methodName) {
       each: _.identity, map: _.identity, reduce: _.identity, reduceRight: _.identity, sortBy: _.identity,
       every: alwaysTrue, filter: alwaysTrue, find: alwaysFalse, reject: alwaysFalse, some: alwaysFalse,
       contains: {}, findWhere: {}, where: {}, pluck: "",
-      max: undefined, min: undefined, isEmpty: undefined,
+      max: _.identity, min: _.identity, isEmpty: undefined,
     };
     var secondArg = secondArgLibrary[methodName]
     _[methodName](collection, secondArg);
@@ -136,7 +136,6 @@ describe("_.map", function () {
 
   it("works on arrays", function () {
     var input = [1,2,3];
-    var expected = [
       [2, 0, [1,2,3]],
       [3, 1, [1,2,3]],
       [4, 2, [1,2,3]],
@@ -181,7 +180,7 @@ describe("_.map", function () {
 //   2) the value  of the iteration, and a reference to the entire collection.
 //   3) the index (or key)
 //   4) a reference to the original collection
-// If no `intial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
+// If no `initial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
 // and the first element is instead passed as the `initial` in the invocation of the iteratee on the next element in the collection.
 // Example(s):
 //   _.reduce([2, 3], function(sum, n){ return sum + num; }, 1);
@@ -212,18 +211,18 @@ describe("_.reduce", function () {
   it("passes {total, value, key, collection} to the iteratee", function () {
     var actualArgs;
     var setArgs = function (total, value, key, collection) {
-      actualArgs = {t:total, v:value, k:index, c:collection};
+      actualArgs = {t:total, v:value, k:key, c:collection};
       return true;
     };
-    _.reduce({a:1, length:1}, setArgs, 42);
-    expect(actualArgs).toEqual({t:42, v:1, k:"a", c:{a:1, length:1}});
+    _.reduce({"0":1, length:1}, setArgs, 42);
+    expect(actualArgs).toEqual({t:42, v:1, k:0, c:{"0":1, length:1}});
   });
 });
 
 
 // _.reduceRight(collection, iteratee, [initial])
 // The "right to left" version of reduce.
-// If no `intial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
+// If no `initial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
 // and the last element is instead passed as the `initial` in the invocation of the iteratee on the second to last element in the collection.
 // Example(s):
 //   var collection = [[0, 1], [2, 3], [4, 5]];
@@ -235,8 +234,8 @@ describe("_.reduceRight", function () {
     it("should iterate in reverse", function () {
       var input = [1,2,3];
       var pusher = function (pushed, nextElement) {
-        arr.push(element);
-        return arr;
+        pushed.push(nextElement);
+        return pushed;
       };
       //note the start value is an empty array
       expect(_.reduceRight(input, pusher, [])).toEqual([3,2,1]);
@@ -261,7 +260,7 @@ describe("_.find", function () {
   it("returns early after finding its target", function () {
     var runCount = 0;
     var isEvenWithCounter = function (n) {runCount++; return isEven(n);}
-    _.find([1,2,3,4], isEven)
+    _.find([1,2,3,4], isEvenWithCounter)
     expect(runCount).toBe(2);
   });
 
@@ -363,7 +362,7 @@ describe("_.findWhere", function () {
   });
 
   it("handles primitive values gracefully", function () {
-    expect(_.findWhere([1,true,{a:1}], {a:1})).toEqual([{a:1}]);
+    expect(_.findWhere([1,true,{a:1}], {a:1})).toEqual({a:1});
   });
 
   it("returns `undefined` if no match is found", function () {
@@ -416,7 +415,7 @@ describe("_.every", function () {
   it("returns early after a failed predicate", function () {
     var runCount = 0;
     var isEvenWithCounter = function (n) {runCount++; return isEven(n);}
-    _.every([2,3,4,6], isEven)
+    _.every([2,3,4,6], isEvenWithCounter)
     expect(runCount).toBe(2);
   });
 
@@ -452,7 +451,7 @@ describe("_.some", function () {
   it("returns early after a passed predicate", function () {
     var runCount = 0;
     var isOddWithCounter = function (n) {runCount++; return isOdd(n);}
-    _.some([2,3,4,6], isOdd)
+    _.some([2,3,4,6], isOddWithCounter)
     expect(runCount).toBe(2);
   });
 
@@ -554,7 +553,7 @@ describe("_.max", function () {
   });
 
   it("ignores non number values", function () {
-    expect(_.max([-2, "1", "2", [], null, true]), _.identity).toBe(-2);
+    expect(_.max([-2, "1", "2", [], null, true], _.identity)).toBe(-2);
   });
 
   it("defaults to the identity function if no iteratee is supplied", function () {
@@ -646,10 +645,10 @@ describe("_.indexBy", function () {
   };
   it("returns a key/value store, based on a the return of an iteratee function", function () {
     var getAge = function (obj) {return obj.age;}
-    expect(_.indexBy(stooges), getAge).toEqual(indexed);
+    expect(_.indexBy(stooges, getAge)).toEqual(indexed);
   });
   it("returns a key/value store, based on a the return on a string propertyName", function () {
-    expect(_.indexBy(stooges), "age").toEqual(indexed);
+    expect(_.indexBy(stooges, "age")).toEqual(indexed);
   });
 });
 
