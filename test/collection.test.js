@@ -136,6 +136,7 @@ describe("_.map", function () {
 
   it("works on arrays", function () {
     var input = [1,2,3];
+    var expected = [
       [2, 0, [1,2,3]],
       [3, 1, [1,2,3]],
       [4, 2, [1,2,3]],

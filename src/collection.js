@@ -111,37 +111,31 @@ _.map = function (collection, iteratee) {
 //   How could you reuse _.forEach here?
 
 _.reduce = function (collection, iteratee, initial) {
-  /* TODO */
   // variable to hold our total
   var total = 0;
-
+  // using an if else statement. If initial is not defined we set initial to the index value.
   if(initial == undefined){
-
-    var total = 0;
-
-    //get the first element of collection
-    if(collection.length !== undefined){
-      total = collection[0];
-
-    } else {
-        total = collection[Object.keys(collection)[0]];
-    };
-
+    // I created a new variable to hold a value to use with _.each
+    var iteration = 1;
+    //I will use _.each to iterate through collection
     _.each(collection, function(value, key, collection){
-      iteratee(total, value, key, collection);
+      // if my temp variable is 1 we will set the total to the value at the index.
+      if(iteration == 1) {
+        total = value;
+        iteration++;
+      } else {
+        //every subsequent iteration will execute the iteratee
+        total = iteratee(total, value, key, collection);
+      }
     });
-
     return total;
-
   } else {
-
+    // this else statement will be used if initial is passed to _.reduce
     total = initial;
-
-    // use _.each to add the value to the total
+    // I will use _.each to iterate through collection
     _.each(collection, function(value, key, collection){
       iteratee(total, value, key, collection);
     });
-
     // return the total
     return total;
   }
