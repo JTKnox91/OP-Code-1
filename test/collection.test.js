@@ -58,11 +58,9 @@ describe("_.each", function () {
 
   //setup
   var actual;
-  //before the function is run, declare the variable actual
   beforeEach(function () {
     actual = [];
   });
-  //declare the iteratee
   var pushToActual = function (value, key, collection) {
     actual.push([value, key, collection]);
   }
@@ -197,18 +195,14 @@ describe("_.map", function (collection, iteratee) {
 //   => 6
 //   _.reduce([0, 1, 2], function(product, n){ return product * num; });
 //   => 0
-describe("_.reduce", function (collection, iteratee, initial) {
+describe("_.reduce", function () {
   mutateTest("reduce");
 
   //setup
-  var total = initial;
-
-  var multiply = function (value, key, collection) {
-    _.each(collection, function(){
-      total * value;
-    });
+  var input = {a:1,b:2,c:3};
+  var multiply = function (prod, n) {
+    return prod * n;
   };
-  return total;
 
   it("runs an iteratee on all its elements", function () {
     expect(_.reduce(input, multiply)).toBe(6);
