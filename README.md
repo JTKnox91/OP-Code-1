@@ -12,6 +12,10 @@ A small tribute to the [Underscore.js](http://underscorejs.org/) library ...as a
 
 `$ cd <NEW_FOLDER_NAME>`
 
+3. Setup the original repo as your 'upstream' so you can get updates.
+
+`$ git remote add upstream https://github.com/jtknox91/OP-Code-1.git`
+
 ## Usage
 
 1. Open `TestRunner.html` in a web browser.
