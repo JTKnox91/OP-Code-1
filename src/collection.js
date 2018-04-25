@@ -112,6 +112,39 @@ _.map = function (collection, iteratee) {
 
 _.reduce = function (collection, iteratee, initial) {
   /* TODO */
+  // variable to hold our total
+  var total = 0;
+
+  if(initial == undefined){
+
+    var total = 0;
+
+    //get the first element of collection
+    if(collection.length !== undefined){
+      total = collection[0];
+
+    } else {
+        total = collection[Object.keys(collection)[0]];
+    };
+
+    _.each(collection, function(value, key, collection){
+      iteratee(total, value, key, collection);
+    });
+
+    return total;
+
+  } else {
+
+    total = initial;
+
+    // use _.each to add the value to the total
+    _.each(collection, function(value, key, collection){
+      iteratee(total, value, key, collection);
+    });
+
+    // return the total
+    return total;
+  }
 };
 
 
