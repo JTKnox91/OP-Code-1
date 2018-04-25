@@ -20,9 +20,7 @@ window._ = _ = (window._ || {});
 //   => ["one", "two", "three"]
 
 _.keys = function (object) {
-  return _.map(object, function (v,k) {
-    return k;
-  });
+  /* TODO */
 };
 
 
@@ -33,9 +31,7 @@ _.keys = function (object) {
 //   => [1, 2, 3]
 
 _.values = function (object) {
-  return _.map(object, function (v,k) {
-    return v;
-  });
+  /* TODO */
 };
 
 
@@ -48,11 +44,7 @@ _.values = function (object) {
 //   => {start: 10, end: 17}
 
 _.mapObject = function (object, iteratee) {
-  var result = {};
-  _.each(object, function (v,k,c) {
-    result[k] = iteratee(v,k,c);
-  });
-  return result;
+  /* TODO */
 };
 
 
@@ -63,9 +55,7 @@ _.mapObject = function (object, iteratee) {
 //   => [["one", 1], ["two", 2], ["three", 3]]
 
 _.pairs = function (object) {
-  return _.map(object, function (v,k) {
-    return [k,v];
-  });
+  /* TODO */
 };
 
 
@@ -79,11 +69,7 @@ _.pairs = function (object) {
 //   Your values need to be unique from other values, but not nessecarily from the current keys.
 
 _.invert = function (object) {
-  var result = {};
-  _.each(object, function (v,k,c) {
-    result[v] = k;
-  });
-  return result;
+  /* TODO */
 };
 
 
@@ -95,10 +81,7 @@ _.invert = function (object) {
 //   => ["all", "any", "bind", "bindAll", "clone", "compact", "compose" ...
 
 _.functions = function (object) {
-  var result = _.pick(object, function (v) {
-    return typeof v === "function";
-  });
-  return _.keys(result);
+  /* TODO */
 };
 
 
@@ -106,10 +89,7 @@ _.functions = function (object) {
 // Similar to _.findIndex but for keys in objects. Returns the key where the predicate truth test passes or undefined.
 
 _.findKey = function (object, predicate) {
-  for (var k in object) {
-    if (predicate(object[k], k, object)) {return k;}
-  }
-  return undefined;
+  /* TODO */
 };
 
 
@@ -122,13 +102,7 @@ _.findKey = function (object, predicate) {
 //   => {name: 'moe', age: 50}
 
 _.extend = function (destination) {
-  _.each(arguments, function (source, i) {
-    if (i === 0) {return;}
-    _.each(source, function (v, k) {
-      destination[k] = v;
-    });
-  });
-  return destination;
+  /* TODO */
 };
 
 
@@ -139,15 +113,7 @@ _.extend = function (destination) {
 //   => {name: 'moe', age: 50}
 
 _.extendOwn = function (destination) {
-  _.each(arguments, function (source, i) {
-    if (i === 0) {return;}
-    _.each(source, function (v, k) {
-      if (destination.hasOwnProperty(k)) {
-        destination[k] = v;
-      }
-    });
-  });
-  return destination;
+  /* TODO */
 };
 
 
@@ -165,26 +131,7 @@ _.extendOwn = function (destination) {
 //   You will need to pay attention to the number of arguments passed into the function.
 
 _.pick = function (object, predicate) {
-  var result = {};
-  if (typeof predicate === "function") {
-    _.each(object, function (v,k, object) {
-      if (predicate(v,k,object)) {result[k] = v;}
-    });
-  } else if (typeof predicate === "object") {
-    _.each(predicate, function (key, i) {
-      _.each(object, function (v,k) {
-        if (k === key) {result[k] = v;}
-      });
-    });
-  } else {
-    _.each(arguments, function (key, i) {
-      if (i === 0) {return;}
-      _.each(object, function (v,k) {
-        if (k === key) {result[k] = v;}
-      });
-    });
-  }
-  return result;
+  /* TODO */
 };
 
 
@@ -201,26 +148,7 @@ _.pick = function (object, predicate) {
 //   => {name: 'moe', userid: 'moe1'}
 
 _.omit = function (object, predicate) {
-  var result = {};
-  if (typeof predicate === "function") {
-    _.each(object, function (v,k,c) {
-      if (!predicate(v,k,c)) {result[k] = v;}
-    });
-  } else if (typeof predicate === "object") {
-    _.each(predicate, function (key, i) {
-      _.each(object, function (v,k) {
-        if (k !== key) {result[k] = v;}
-      });
-    });
-  } else {
-    _.each(arguments, function (key, i) {
-      if (i === 0) {return;}
-      _.each(object, function (v,k) {
-        if (k !== key) {result[k] = v;}
-      });
-    });
-  }
-  return result;
+  /* TODO */
 };
 
 
@@ -231,18 +159,8 @@ _.omit = function (object, predicate) {
 //   _.defaults(iceCream, {flavor: "vanilla", sprinkles: "lots"}, {sprinkles, "little"});
 //   => {flavor: "chocolate", sprinkles: "lots"}
 
-_.defaults = function (object) {
-  _.each(arguments, function (source, i) {
-    if (i === 0) {return;}
-    _.each(source, function (v,k) {
-      if (object.hasOwnProperty(k)) {
-        return;
-      } else {
-        object[k] = v;
-      }
-    });
-  });
-  return object;
+_.defaults = function (obect) {
+  /* TODO */
 };
 
 
@@ -253,17 +171,5 @@ _.defaults = function (object) {
 //   => {name: 'moe'};
 
 _.clone = function (object) {
-  var result;
-  if (Array.isArray(object)) {
-    result = []
-  } else if (typeof object === "object") {
-    if (object === null) {return null;}
-    result = {};
-  } else {
-    return object;
-  }
-  for (var k in object) {
-    result[k] = _.clone(object[k]);
-  }
-  return result;
+  /* TODO */
 };
