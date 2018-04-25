@@ -21,7 +21,7 @@
 window._ = _ = (window._ || {});
 
 
-// _.identity(value) 
+// _.identity(value)
 // Returns the same value that is used as the argument. In math: f(x) = x
 // This function looks useless, but is used throughout Underscore as a default iteratee.
 // Note(s):
@@ -58,7 +58,7 @@ _.each = function (collection, iteratee) {
   } else {
     for (var key in collection) {
       iteratee(collection[key], key, collection);
-      // ^ same note as the array version, but passing the named key 
+      // ^ same note as the array version, but passing the named key
       // instead of index
     }
   }
@@ -79,7 +79,17 @@ _.each = function (collection, iteratee) {
 //   How could you reuse _.forEach here?
 
 _.map = function (collection, iteratee) {
-  /* TODO */
+  // create a a variable to hold the new array.
+  var newArray = [];
+
+  // iterate through each item or key in our collection using _.each
+  _.each(collection, function(value, key, collection){
+    // use the iteratee to push the new values to our newArray.
+    newArray.push(iteratee(value, key, collection));
+  })
+
+  //return the new Array.
+  return newArray;
 };
 
 
@@ -150,7 +160,7 @@ _.filter = function (collection, predicate) {
 };
 
 
-// _.where(collection, properties) 
+// _.where(collection, properties)
 // Looks through each value in the collection, returning an array
 // of all the values that contain all of the key-value pairs collectioned in properties.
 // Example(s):
@@ -165,7 +175,7 @@ _.where = function (collection, properties) {
 };
 
 
-// _.findWhere(collection, properties) 
+// _.findWhere(collection, properties)
 // Looks through the collection and returns the first value that matches all of the key-value pairs collectioned in properties.
 // If no match is found, or if collection is empty, undefined will be returned.
 // Example(s):
@@ -180,7 +190,7 @@ _.findWhere = function (collection, properties) {
 };
 
 
-// _.reject(collection, predicate) 
+// _.reject(collection, predicate)
 // Returns the values in collection without the elements that the truth test (predicate) passes. The opposite of filter.
 // Example(s):
 //   var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
@@ -230,7 +240,7 @@ _.contains = function (collection, value) {
 };
 
 
-// _.pluck(collection, propertyName) 
+// _.pluck(collection, propertyName)
 // A convenient version of what is perhaps the most common use-case for _.map: extracting a collection of property values.
 // Example(s):
 // var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
@@ -243,7 +253,7 @@ _.pluck = function (collection, propertyName) {
 };
 
 
-// _.max(collection, [iteratee]) 
+// _.max(collection, [iteratee])
 // Returns the maximum value in collection. If an iteratee function is provided,
 // it will be used on each value to generate the criterion by which the value is ranked.
 // Number.NEGATIVE_INFINITY is returned if collection is empty. Non-numerical values in collection will be ignored.
@@ -270,7 +280,7 @@ _.min = function (collection, iteratee) {
 };
 
 
-// _.sortBy(collection, iteratee) 
+// _.sortBy(collection, iteratee)
 // Returns a sorted copy of collection, ranked in ascending order by the results of running
 // each value through iteratee. iteratee may also be the string name of the property to sort by (eg. length).
 // Example(s):
@@ -286,7 +296,7 @@ _.sortBy = function (collection, iteratee) {
 
 
 // _.indexBy(collection, iteratee)
-// Given a list, and an iteratee function that returns a key for each element in the list 
+// Given a list, and an iteratee function that returns a key for each element in the list
 // (or a property name), returns an object with an index of each item.
 // Example(s):
 //   var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
@@ -297,7 +307,7 @@ _.sortBy = function (collection, iteratee) {
 //     "60": {name: 'curly', age: 60}
 //   }
 // Note(s):
-//   This is only expected to work your keys are unique. 
+//   This is only expected to work your keys are unique.
 
 _.indexBy = function (collection, iteratee) {
   /* TODO */
@@ -313,14 +323,14 @@ _.indexBy = function (collection, iteratee) {
 //   _.groupBy(['one', 'two', 'three'], 'length');
 //   => {3: ["one", "two"], 5: ["three"]}
 // Note(s):
-//   Similiar to _.indexBy but can handle non-unqiue keys.  
+//   Similiar to _.indexBy but can handle non-unqiue keys.
 
 _.groupBy = function (collection, iteratee) {
   /* TODO */
 };
 
 
-// _.isEmpty(object) 
+// _.isEmpty(object)
 // Returns true if an enumerable object contains no values (no enumerable own-properties).
 // For strings and array-like objects _.isEmpty checks if the length property is 0.
 // Example(s):
@@ -333,7 +343,7 @@ _.isEmpty = function (object) {
 
 };
 
-// _.isEqual(object, other) 
+// _.isEqual(object, other)
 // Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
 // Example(s):
 //   var stooge = {name: 'moe', luckyNumbers: [13, 27, 34]};

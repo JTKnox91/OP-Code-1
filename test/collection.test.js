@@ -4,7 +4,7 @@
 
 describe("Utility Module", function () {
 
-  // _.identity(value) 
+  // _.identity(value)
   // Returns the same value that is used as the argument. In math: f(x) = x
   // This function looks useless, but is used throughout Underscore as a default iteratee.
   describe("_.identity", function () {
@@ -30,7 +30,7 @@ var mutateTest = function (methodName) {
     var secondArgLibrary = {
       each: _.identity, map: _.identity, reduce: _.identity, reduceRight: _.identity, sortBy: _.identity,
       every: alwaysTrue, filter: alwaysTrue, find: alwaysFalse, reject: alwaysFalse, some: alwaysFalse,
-      contains: {}, findWhere: {}, where: {}, pluck: "", 
+      contains: {}, findWhere: {}, where: {}, pluck: "",
       max: undefined, min: undefined, isEmpty: undefined,
     };
     var secondArg = secondArgLibrary[methodName]
@@ -52,10 +52,10 @@ var isOdd = function (n) {return n%2 !== 0;}
 //   _.each([1, 2, 3], alert);
 //   => alerts 1, then 2, then 3
 //   _.each({one: 1, two: 2, three: 3}, alert);
-//   => also alerts 1, then 2, then 3  
+//   => also alerts 1, then 2, then 3
 describe("_.each", function () {
   mutateTest("each");
-  
+
   //setup
   var actual;
   beforeEach(function () {
@@ -97,7 +97,7 @@ describe("_.each", function () {
     ];
     _.each(input, pushToActual);
     expect(actual).toEqual(expected);
-  });  
+  });
 
   it("does nothing with empty collections", function () {
     var input;
@@ -113,7 +113,7 @@ describe("_.each", function () {
     expect(actual).toEqual(expected);
   });
 });
-  
+
 
 // _.map(collection, iteratee)
 // Produces a new array of values by mapping each value in collection through a transformation function (iteratee).
@@ -128,7 +128,7 @@ describe("_.each", function () {
 //   => [1, 3]
 describe("_.map", function () {
   mutateTest("map");
-  
+
   //setup
   var argsToArrayPlus1 = function (value, key, collection) {
     return [value+1, key, collection];
@@ -141,7 +141,7 @@ describe("_.map", function () {
       [3, 1, [1,2,3]],
       [4, 2, [1,2,3]],
     ];
-    expect(_.each(input, argsToArrayPlus1)).toEqual(expected);
+    expect(_.map(input, argsToArrayPlus1)).toEqual(expected);
   });
 
 
@@ -152,7 +152,7 @@ describe("_.map", function () {
       [3, "b", {"a":1,"b":2,"c":3}],
       [4, "c", {"a":1,"b":2,"c":3}],
     ];
-    expect(_.each(input, argsToArrayPlus1)).toEqual(expected);
+    expect(_.map(input, argsToArrayPlus1)).toEqual(expected);
   });
 
   it("works on array-likes", function () {
@@ -162,14 +162,14 @@ describe("_.map", function () {
       [3, 1, {"0":1,"1":2,"2":3,"length":3}],
       [4, 2, {"0":1,"1":2,"2":3,"length":3}],
     ];
-    expect(_.each(input, argsToArrayPlus1)).toEqual(expected);
-  });  
+    expect(_.map(input, argsToArrayPlus1)).toEqual(expected);
+  });
 
   it("returns empty array for empty collections", function () {
     var expected = [];
-    expect(_.each([], argsToArrayPlus1)).toEqual(expected);
-    expect(_.each({}, argsToArrayPlus1)).toEqual(expected);
-    expect(_.each({"length":0}, argsToArrayPlus1)).toEqual(expected);
+    expect(_.map([], argsToArrayPlus1)).toEqual(expected);
+    expect(_.map({}, argsToArrayPlus1)).toEqual(expected);
+    expect(_.map({"length":0}, argsToArrayPlus1)).toEqual(expected);
   });
 });
 
@@ -294,7 +294,7 @@ describe("_.filter", function () {
 });
 
 
-// _.where(collection, properties) 
+// _.where(collection, properties)
 // Looks through each value in the collection, returning an array
 // of all the values that contain all of the key-value pairs collectioned in properties.
 // Example(s):
@@ -334,7 +334,7 @@ describe("_.where.", function () {
 });
 
 
-// _.findWhere(collection, properties) 
+// _.findWhere(collection, properties)
 // Looks through the collection and returns the first value that matches all of the key-value pairs collectioned in properties.
 // If no match is found, or if collection is empty, undefined will be returned.
 // Example(s):
@@ -376,7 +376,7 @@ describe("_.findWhere", function () {
 });
 
 
-// _.reject(collection, predicate) 
+// _.reject(collection, predicate)
 // Returns the values in collection without the elements that the truth test (predicate) passes. The opposite of filter.
 // Example(s):
 //   var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
@@ -510,7 +510,7 @@ describe("_.contains", function () {
 });
 
 
-// _.pluck(collection, propertyName) 
+// _.pluck(collection, propertyName)
 // A convenient version of what is perhaps the most common use-case for _.map: extracting a collection of property values.
 // Example(s):
 // var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
@@ -537,7 +537,7 @@ describe("_.pluck", function () {
 });
 
 
-// _.max(collection, [iteratee]) 
+// _.max(collection, [iteratee])
 // Returns the maximum value in collection. If an iteratee function is provided,
 // it will be used on each value to generate the criterion by which the value is ranked.
 // Number.NEGATIVE_INFINITY is returned if collection is empty. Non-numerical values in collection will be ignored.
@@ -596,7 +596,7 @@ describe("_.min", function () {
 });
 
 
-// _.sortBy(collection, iteratee) 
+// _.sortBy(collection, iteratee)
 // Returns a sorted copy of collection, ranked in ascending order by the results of running
 // each value through iteratee. iteratee may also be the string name of the property to sort by (eg. length).
 // Example(s):
@@ -624,7 +624,7 @@ describe("_.sortBy", function () {
 
 
 // _.indexBy(collection, iteratee)
-// Given a list, and an iteratee function that returns a key for each element in the list 
+// Given a list, and an iteratee function that returns a key for each element in the list
 // (or a property name), returns an object with an index of each item.
 // Example(s):
 //   var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
@@ -634,7 +634,7 @@ describe("_.sortBy", function () {
 //     "50": {name: 'larry', age: 50},
 //     "60": {name: 'curly', age: 60}
 //   }
-describe("_.indexBy", function () {  
+describe("_.indexBy", function () {
   var stooges = [
     {name: 'moe', age: 40},
     {name: 'larry', age: 50},
@@ -673,7 +673,7 @@ describe("_.groupBy", function () {
 });
 
 
-// _.isEmpty(collection) 
+// _.isEmpty(collection)
 // Returns true if an enumerable object contains no values (no enumerable own-properties).
 // For strings and array-like objects _.isEmpty checks if the length property is 0.
 // Example(s):
@@ -683,15 +683,15 @@ describe("_.groupBy", function () {
 //   => true
 describe("_.isEmpty", function () {
   it("returns true for empty collections", function () {
-    expect(_.isEmpty({})).toBe(true); 
+    expect(_.isEmpty({})).toBe(true);
   });
   it("returns false for non-empty collections", function () {
-    expect(_.isEmpty([1, 2, 3])).toBe(false); 
+    expect(_.isEmpty([1, 2, 3])).toBe(false);
   });
 });
 
 
-// _.isEqual(collection, other) 
+// _.isEqual(collection, other)
 // Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
 // Example(s):
 //   var stooge = {name: 'moe', luckyNumbers: [13, 27, 34]};
