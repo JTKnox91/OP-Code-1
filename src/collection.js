@@ -112,9 +112,9 @@ _.map = function (collection, iteratee) {
 
 _.reduce = function (collection, iteratee, initial) {
   // variable to hold our total
-  var total = 0;
+  var total;
   // using an if else statement. If initial is not defined we set initial to the index value.
-  if(initial == undefined){
+  if(initial === undefined){
     // I created a new variable to hold a value to use with _.each
     var iteration = 1;
     //I will use _.each to iterate through collection
@@ -154,7 +154,18 @@ _.reduce = function (collection, iteratee, initial) {
 //   For non-array like collections this is functionally equivalent to _.reduce.
 
 _.reduceRight = function (collection, iteratee, initial) {
-  /* TODO */
+  /*
+    I have to go back and break this down again, I am stumped. And the test passed, but I know Im not done.
+  */
+    var newArray = [];
+    if(initial === undefined){
+      "?????";
+    } else {
+      for(var i = collection.length - 1; i > -1; i--){
+        newArray.push(collection[i]);
+      }
+    }
+    return newArray;
 };
 
 
