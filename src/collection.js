@@ -162,6 +162,7 @@ _.reduceRight = function (collection, iteratee, initial) {
       "?????";
     } else {
       for(var i = collection.length - 1; i > -1; i--){
+        // need to figure out how to use the iteratee and reverse the collection prior to passing as an argument.
         newArray.push(collection[i]);
       }
     }
