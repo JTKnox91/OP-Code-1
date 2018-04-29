@@ -182,7 +182,15 @@ _.reduceRight = function (collection, iteratee, initial) {
 //   because it should return early as soon as finding a match.
 
 _.find = function (collection, predicate) {
-  /* TODO */
+
+  var result = [];
+  _.each(collection, function(value, key, collection){
+    if(predicate(value) == true){
+      result.push(value);
+    };
+  });
+
+  return result[0];
 };
 
 
