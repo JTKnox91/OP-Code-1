@@ -182,15 +182,31 @@ _.reduceRight = function (collection, iteratee, initial) {
 //   because it should return early as soon as finding a match.
 
 _.find = function (collection, predicate) {
+  //create a variable that holds the result
+  var result;
 
-  var result = [];
-  _.each(collection, function(value, key, collection){
-    if(predicate(value) == true){
-      result.push(value);
+  // I intitially tried to use _.each, but realized that I couldnt terminate early using return or break.
+  // I than realized the comments stated not to reuse one of the other functions so I used _.each to help me.
+  if(collection.length != undefined){
+    //for loop to iterate over the array.
+    for (var i = 0; i < collection.length; i++) {
+      //if true we will return the first result.
+      if(predicate(collection[i]) === true) {
+        return collection[i];
+      };
     };
-  });
+  } else {
+    //for loop to iterate over objects
+    for (var key in collection) {
+      //if true, we will return the first result.
+      if(predicate(collection[key]) === true) {
+        return collection[key];
+      };
+    }
+  };
 
-  return result[0];
+  //return result
+  return result;
 };
 
 
