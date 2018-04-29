@@ -100,7 +100,7 @@ _.map = function (collection, iteratee) {
 //   2) the value  of the iteration, and a reference to the entire collection.
 //   3) the index (or key)
 //   4) a reference to the original collection
-// If no `intial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
+// If no `initial` is passed to the initial invocation of reduce,the iteratee is not invoked on the first element of the collection,
 // and the first element is instead passed as the `initial` in the invocation of the iteratee on the next element in the collection.
 // Example(s):
 //   _.reduce([2, 3], function(sum, n){ return sum + num; }, 1);
@@ -144,7 +144,7 @@ _.reduce = function (collection, iteratee, initial) {
 
 // _.reduceRight(collection, iteratee, [initial])
 // The "right to left" version of reduce.
-// If no `intial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
+// If no `initial` is passed to the initial invocation of reduce, the iteratee is not invoked on the last element of the collection,
 // and the last element is instead passed as the `initial` in the invocation of the iteratee on the second to last element in the collection.
 // Example(s):
 //   var collection = [[0, 1], [2, 3], [4, 5]];
