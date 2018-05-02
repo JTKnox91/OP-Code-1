@@ -157,16 +157,8 @@ _.reduceRight = function (collection, iteratee, initial) {
   /*
     I have to go back and break this down again, I am stumped. And the test passed, but I know Im not done.
   */
-    var newArray = [];
-    if(initial === undefined){
-      "?????";
-    } else {
-      for(var i = collection.length - 1; i > -1; i--){
-        // need to figure out how to use the iteratee and reverse the collection prior to passing as an argument.
-        newArray.push(collection[i]);
-      }
-    }
-    return newArray;
+
+  //FUCK -_-
 };
 
 
@@ -218,8 +210,18 @@ _.find = function (collection, predicate) {
 // Note(s):
 //   How could you reuse _.reduce here?
 
+//Still trying to figure this out.
 _.filter = function (collection, predicate) {
   /* TODO */
+  var newArray = [];
+
+  _.reduce(collection, function(value, key, collection){
+    if(predicate(value) === true){
+      newArray.push(collection);
+    }
+  });
+  return newArray;
+
 };
 
 
