@@ -206,8 +206,8 @@ _.filter = function (collection, predicate) {
 
   _.each(collection, function(value, key, collection){
     if(predicate(value) === true){
-      newArray.push(collection);
-    }
+      newArray.push(value);
+    };
   });
   return newArray;
 };
