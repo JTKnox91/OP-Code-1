@@ -204,12 +204,20 @@ _.filter = function (collection, predicate) {
   /* TODO */
   var newArray = [];
 
+  _.reduce(collection, function(previous, current){
+    if(predicate(current) === true){
+      newArray.push(current);
+    }
+  });
+  return newArray;
+
+  //Below is my original code before reduce
+  /*
   _.each(collection, function(value, key, collection){
     if(predicate(value) === true){
       newArray.push(value);
     };
-  });
-  return newArray;
+  });*/
 };
 
 
