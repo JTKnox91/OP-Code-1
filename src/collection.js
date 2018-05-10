@@ -85,6 +85,7 @@ _.map = function (collection, iteratee) {
   // iterate through each item or key in our collection using _.each
   _.each(collection, function(value, key, collection){
     // use the iteratee to push the new values to our newArray.
+    //another method as explained is newArray.push(iteratee.apply(null, arguments))
     newArray.push(iteratee(value, key, collection));
   })
 
@@ -111,35 +112,19 @@ _.map = function (collection, iteratee) {
 //   How could you reuse _.forEach here?
 
 _.reduce = function (collection, iteratee, initial) {
-  // variable to hold our total
-  var total;
-  // using an if else statement. If initial is not defined we set initial to the index value.
-  if(initial === undefined){
-    // I created a new variable to hold a value to use with _.each
-    var iteration = 1;
-    //I will use _.each to iterate through collection
-    _.each(collection, function(value, key, collection){
-      // if my temp variable is 1 we will set the total to the value at the index.
-      if(iteration == 1) {
-        total = value;
-        iteration++;
-      } else {
-        //every subsequent iteration will execute the iteratee
-        total = iteratee(total, value, key, collection);
-      }
-    });
-    return total;
-  } else {
-    // this else statement will be used if initial is passed to _.reduce
-    total = initial;
-    // I will use _.each to iterate through collection
-    _.each(collection, function(value, key, collection){
-      iteratee(total, value, key, collection);
-    });
-    // return the total
-    return total;
-  }
-};
+  // changed my code for the modified code from the meeting.
+  var currentTotal = initial;
+  var first = true;
+  _.each(collection, function(value, key, collection) {
+    if (currentTotal === undefined && first) {
+      first = false;
+      currentTotal = value;
+    } else {
+      currentTotal = iteratee(currentTotal, value, key, collection)
+    }
+  });
+  return currentTotal;
+}
 
 
 // _.reduceRight(collection, iteratee, [initial])
@@ -154,11 +139,20 @@ _.reduce = function (collection, iteratee, initial) {
 //   For non-array like collections this is functionally equivalent to _.reduce.
 
 _.reduceRight = function (collection, iteratee, initial) {
-  /*
-    I have to go back and break this down again, I am stumped. And the test passed, but I know Im not done.
-  */
+  //changed code for the code from our meeting.
+  // part 1 - figure out if array or object
+  if(collection.length !== undefined){
+  	// part 2 - if array, create reversed array (nothing special for object)
+    var newArray = [];
 
-  //FUCK -_-
+    for(var i = collection.length - 1; i >= 0; i--) {
+      newArray.push(collection[i]);
+    }
+
+    collection = newArray;
+  }
+  // part 3 - run reduce as normal (on reversed array)
+  return _.reduce(collection, iteratee, initial);
 };
 
 
@@ -174,9 +168,6 @@ _.reduceRight = function (collection, iteratee, initial) {
 //   because it should return early as soon as finding a match.
 
 _.find = function (collection, predicate) {
-  //create a variable that holds the result
-  var result;
-
   // I intitially tried to use _.each, but realized that I couldnt terminate early using return or break.
   // I than realized the comments stated not to reuse one of the other functions so I used _.each to help me.
   if(collection.length != undefined){
@@ -196,9 +187,8 @@ _.find = function (collection, predicate) {
       };
     }
   };
-
-  //return result
-  return result;
+  //taken from our meeting. returning undefined if not found.
+  return undefined;
 };
 
 
@@ -210,19 +200,18 @@ _.find = function (collection, predicate) {
 // Note(s):
 //   How could you reuse _.reduce here?
 
-//Still trying to figure this out.
 _.filter = function (collection, predicate) {
   /* TODO */
   var newArray = [];
 
-  _.reduce(collection, function(value, key, collection){
+  _.each(collection, function(value, key, collection){
     if(predicate(value) === true){
       newArray.push(collection);
     }
   });
   return newArray;
-
 };
+
 
 
 // _.where(collection, properties)
@@ -326,6 +315,8 @@ _.pluck = function (collection, propertyName) {
 //   var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
 //   _.max(stooges, function(stooge){ return stooge.age; });
 //   => {name: 'curly', age: 60};
+
+//____________________GOAL_______________________
 
 _.max = function (collection, iteratee) {
   /* TODO */
