@@ -235,6 +235,29 @@ _.filter = function (collection, predicate) {
 
 _.where = function (collection, properties) {
   /* TODO */
+  var newArray = [];
+  var propertiesLength = 0;
+
+  for(var key in properties){
+      propertiesLength++
+  };
+
+  _.each(collection, function(item){
+    var matchCount = 0;
+
+    for (var key in properties){
+      for (var key2 in item){
+        if(properties[key] === item[key2] && key === key2){
+          matchCount++;
+          if (matchCount === propertiesLength){
+            newArray.push(item);
+          }
+        }
+      }
+    };
+  }) ;
+
+  return newArray;
 };
 
 
