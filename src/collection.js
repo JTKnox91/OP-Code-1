@@ -213,11 +213,12 @@ _.filter = function (collection, predicate) {
 
   //Below is my original code before reduce
   /*
-  _.each(collection, function(value, key, collection){
-    if(predicate(value) === true){
-      newArray.push(value);
-    };
-  });*/
+    _.each(collection, function(value, key, collection){
+      if(predicate(value) === true){
+        newArray.push(value);
+      };
+    });
+  */
 };
 
 
@@ -260,6 +261,15 @@ _.findWhere = function (collection, properties) {
 
 _.reject = function (collection, properties) {
   /* TODO */
+  var newArray = [];
+
+  //similar to ._filter, I will return to fix it according to the provided google docs notes.
+  _.reduce(collection, function(previous, current){
+    if(properties(current) === false){
+      newArray.push(current);
+    }
+  });
+  return newArray;
 };
 
 
