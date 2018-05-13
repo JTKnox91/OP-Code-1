@@ -273,6 +273,30 @@ _.where = function (collection, properties) {
 
 _.findWhere = function (collection, properties) {
   /* TODO */
+  var propertiesLength = Object.keys(properties).length;
+  var result;
+  var matchFound = false;
+
+  if (propertiesLength !== 0){
+    _.each(collection, function(item){
+      var matchCount = 0;
+
+      for (var key in properties){
+        for (var key2 in item){
+          if(properties[key] === item[key2] && key === key2){
+            matchCount++;
+            if (matchCount === propertiesLength && matchFound === false){
+              result = item;
+              matchFound = true;
+            }
+          }
+        }
+      };
+    }) ;
+    return result;
+  } else {
+    return collection;
+  }
 };
 
 
