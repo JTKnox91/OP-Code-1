@@ -236,28 +236,28 @@ _.filter = function (collection, predicate) {
 _.where = function (collection, properties) {
   /* TODO */
   var newArray = [];
-  var propertiesLength = 0;
+  var propertiesLength = Object.keys(properties).length;
 
-  for(var key in properties){
-      propertiesLength++
-  };
+  if (propertiesLength !== 0){
+    _.each(collection, function(item){
+      var matchCount = 0;
 
-  _.each(collection, function(item){
-    var matchCount = 0;
-
-    for (var key in properties){
-      for (var key2 in item){
-        if(properties[key] === item[key2] && key === key2){
-          matchCount++;
-          if (matchCount === propertiesLength){
-            newArray.push(item);
+      for (var key in properties){
+        for (var key2 in item){
+          if(properties[key] === item[key2] && key === key2){
+            matchCount++;
+            if (matchCount === propertiesLength){
+              newArray.push(item);
+            }
           }
         }
-      }
-    };
-  }) ;
+      };
+    }) ;
 
-  return newArray;
+    return newArray;
+  } else {
+    return collection;
+  }
 };
 
 
