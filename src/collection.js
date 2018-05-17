@@ -201,16 +201,12 @@ _.find = function (collection, predicate) {
 //   How could you reuse _.reduce here?
 
 _.filter = function (collection, predicate) {
-  /* TODO */
-  var newArray = [];
-
-  _.reduce(collection, function(previous, current){
-    if(predicate(current) === true){
-      newArray.push(current);
-    }
-  });
-  return newArray;
-
+  return _.reduce(collection, function(filtered, nextElement){
+    if(predicate(nextElement) === true){
+      filtered.push(nextElement);
+    };
+    return filtered;
+  }, []);
   //Below is my original code before reduce
   /*
     _.each(collection, function(value, key, collection){
@@ -234,30 +230,17 @@ _.filter = function (collection, predicate) {
 //   How could you reuse _.filter here?
 
 _.where = function (collection, properties) {
-  /* TODO */
-  var newArray = [];
-  var propertiesLength = Object.keys(properties).length;
-
-  if (propertiesLength !== 0){
-    _.each(collection, function(item){
-      var matchCount = 0;
-
-      for (var key in properties){
-        for (var key2 in item){
-          if(properties[key] === item[key2] && key === key2){
-            matchCount++;
-            if (matchCount === propertiesLength){
-              newArray.push(item);
-            }
-          }
-        }
-      };
-    }) ;
-
-    return newArray;
-  } else {
-    return collection;
-  }
+  return _.filter(collection, function(item){
+    // for property in properties
+    for (var key in properties){
+    	// if item does not have matching property, return false
+      if(item[key] !== properties[key]){
+        return false;
+      }
+    }
+    // otherwise, return true
+    return true;
+  });
 };
 
 
@@ -272,31 +255,19 @@ _.where = function (collection, properties) {
 //     conduct of the war."}
 
 _.findWhere = function (collection, properties) {
-  /* TODO */
-  var propertiesLength = Object.keys(properties).length;
-  var result;
-  var matchFound = false;
-
-  if (propertiesLength !== 0){
-    _.each(collection, function(item){
-      var matchCount = 0;
-
-      for (var key in properties){
-        for (var key2 in item){
-          if(properties[key] === item[key2] && key === key2){
-            matchCount++;
-            if (matchCount === propertiesLength && matchFound === false){
-              result = item;
-              matchFound = true;
-            }
-          }
-        }
-      };
-    }) ;
-    return result;
-  } else {
-    return collection;
-  }
+  // Instead of using _.filter like we did in _.where, I decided to use find so that it immediately stops
+  // iterating as soon as a match is found.
+  return _.find(collection, function(item){
+    // for property in properties
+    for (var key in properties){
+    	// if item does not have matching property, return false
+      if(item[key] !== properties[key]){
+        return false;
+      }
+    }
+    // otherwise, return true
+    return true;
+  });
 };
 
 
