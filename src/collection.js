@@ -301,7 +301,23 @@ _.reject = function (collection, properties) {
 //   => false
 
 _.every = function (collection, predicate) {
-  /* TODO */
+  // create a variable to hold the result
+  var result =  _.find(collection, function(item){
+    // iterate through every key in the collection until _.find evaluates to true;
+    for (var key in collection){
+    	// if item does not have matching property, return true
+      if(predicate(collection[key]) !== true){
+        return true;
+      }
+    }
+    // otherwise, return false
+    return false;
+  });
+  // _.find returns undefined if every value matches, so we will return true. If not we will return false.
+  if(result === undefined){
+    return true;
+  }
+  return false;
 };
 
 
