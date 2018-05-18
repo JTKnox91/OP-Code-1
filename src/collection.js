@@ -359,6 +359,15 @@ _.some = function (collection, predicate) {
 
 _.contains = function (collection, value) {
   /* TODO */
+  //console.log("-------------Starting-----------")
+  return _.some(collection, function(item, key){
+    if(item === value){
+      //console.log("true: ", item, " ", value, "\n")
+      return true;
+    }
+    //console.log("false: ", item, " ", value, "\n")
+    return false;
+  });
 };
 
 
@@ -371,7 +380,12 @@ _.contains = function (collection, value) {
 //   => ["moe", "larry", "curly"]
 
 _.pluck = function (collection, propertyName) {
-  /* TODO */
+  //console.log("-----Starting-------")
+  return _.reduce(collection, function(filtered, item){
+    //console.log("item: ", item[propertyName]);
+    filtered.push(item[propertyName]);
+    return filtered;
+  }, []);
 };
 
 
