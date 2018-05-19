@@ -504,7 +504,7 @@ describe("_.contains", function () {
     expect(_.contains({}, 1)).toBe(false);
   });
 
-  it("treats array-liks as arrays", function () {
+  it("treats array-likes as arrays", function () {
     expect(_.contains({"0":"A", length:1}, 1)).toBe(false);
   });
 });
