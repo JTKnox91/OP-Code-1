@@ -9,7 +9,7 @@
 
 // Reference(s):
 //   `Array.prototype` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
-//   `Object.prototyp` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+//   `Object.prototype` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
 //   "array like" objects
 //     `arguments` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
 //     `NodeList` - https://developer.mozilla.org/en-US/docs/Web/API/NodeList
