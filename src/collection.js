@@ -31,6 +31,41 @@ window._ = _ = (window._ || {});
 _.identity = function (input) {return input;};
 // yup, that was really the entire function. Figuring out where to use it is the hard part.
 
+
+// _.shouldTreatLikeArray(collection)
+// Returns boolean weather collection can be treated like array or object. Will return quickly for the following:
+// - Is Instance of Array
+// - Does not have `length` property
+// - Length property does not align with number of properties
+// It will take longer to evalutate if none of those conditions is true.
+
+_.shouldTreatLikeArray = function (collection) {
+  if (Array.isArray(collection)) {
+    return true;
+  } else if (typeof collection.length !== "number") {
+    return false;
+  // +1 because of `length` key itself
+  } else if (Object.keys(collection).length !== collection.length+1) {
+    return false;
+  } else {
+    var uniqueIndeces = {}; // Note this is a great use case for an "ES6 Set". We'll cover that in the future.
+    var isIndex = function (key) {
+      if (key === "length") return true;
+      // Every key (except `length`) should be numerical, <length, and unique
+      key = parseInt(key);
+      if (!isNaN(key) && uniqueIndeces[key] === undefined && key < collection.length) {
+        uniqueIndeces[key] = true;
+        return true;
+      } else {
+        return false;
+      }
+    };
+    return Object.keys(collection).reduce(function (isArray, key) {
+      return isArray && isIndex(key);
+    });
+  }
+};
+
 // _.each(collection, iteratee)
 // Iterates over a collection of elements, yielding each in turn to an iteratee function. Each
 // invocation of iteratee is called with three arguments: (element, index, collection). If collection is a
@@ -45,7 +80,7 @@ _.each = function (collection, iteratee) {
   /* NO TODO, consider this a freebee :) */
 
   // treat like an array (but could also be `arguments`)
-  if (collection.length !== undefined) {
+  if (_.shouldTreatLikeArray(collection)) {
     for (var i = 0; i < collection.length; i++) {
       iteratee(collection[i], i, collection);
       // ^ note that the iteratee is being passed not just the value,
@@ -170,7 +205,7 @@ _.reduceRight = function (collection, iteratee, initial) {
 _.find = function (collection, predicate) {
   // I intitially tried to use _.each, but realized that I couldnt terminate early using return or break.
   // I than realized the comments stated not to reuse one of the other functions so I used _.each to help me.
-  if(collection.length != undefined){
+  if(_.shouldTreatLikeArray(collection)){
     //for loop to iterate over the array.
     for (var i = 0; i < collection.length; i++) {
       //if true we will return the first result.

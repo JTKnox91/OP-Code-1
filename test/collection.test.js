@@ -271,7 +271,7 @@ describe("_.find", function () {
 
   it("handles regular objects, or array-likes", function () {
     expect(_.find({a:1, b:2, c:3}, isEven)).toBe(2);
-    expect(_.find({a:1, c:3, length:2}, isEven)).toBe(undefined);
+    expect(_.find({"0":1, "1":3, length:2}, isEven)).toBe(undefined);
   });
 });
 
