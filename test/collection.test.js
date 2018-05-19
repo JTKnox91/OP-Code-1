@@ -567,7 +567,7 @@ describe("_.max", function () {
 });
 
 
-// min_.min(collection, [iteratee])
+// _.min(collection, [iteratee])
 // Returns the minimum value in collection. The opposite of _.max.
 // Number.POSITIVE_INFINITY is returned if collection is empty. Non-numerical values in collection will be ignored.
 // Example(s):
