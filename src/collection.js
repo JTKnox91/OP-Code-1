@@ -39,7 +39,7 @@ _.identity = function (input) {return input;};
 // - Length property does not align with number of properties
 // It will take longer to evalutate if none of those conditions is true.
 
-_.treatLikeArray = function (collection) {
+_.shouldTreatLikeArray = function (collection) {
   if (Array.isArray(collection)) {
     return true;
   } else if (typeof collection.length !== "number") {
