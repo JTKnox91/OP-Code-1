@@ -62,7 +62,7 @@ _.shouldTreatLikeArray = function (collection) {
     };
     return Object.keys(collection).reduce(function (isArray, key) {
       return isArray && isIndex(key);
-    });
+    }, true);
   }
 };
 
